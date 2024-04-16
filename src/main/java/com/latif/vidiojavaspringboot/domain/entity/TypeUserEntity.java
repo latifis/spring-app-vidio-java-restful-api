@@ -23,6 +23,8 @@ public class TypeUserEntity {
     @Column(name = "type_user")
     private String typeUser;
 
+    @OneToMany(mappedBy = "typeUserEntity")
+    private List<UserEntity> userEntities;
 //    @OneToMany(mappedBy = "user")
 //    private List<Cart> carts;
 //    @OneToMany(mappedBy = "idType", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)

@@ -21,10 +21,16 @@ public class FavoriteEntity {
     @Column(name = "id_favorite")
     private Long idFavorite;
 
+    @ManyToOne
+    @JoinColumn(name= "id_vidio", referencedColumnName = "id_vidio")
+    private VidioEntity vidio;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "idVidio")
 //    var idVidio: VidioEntity? = null,
 
+    @ManyToOne
+    @JoinColumn(name= "id_user", referencedColumnName = "id_user")
+    private UserEntity user;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "idUser")
 //    var idUser: UserEntity? = null,

@@ -27,5 +27,7 @@ public class GenreEntity {
 //    @OneToMany(mappedBy = "idGenre", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
 //    var vidios: MutableList<VidioEntity> = mutableListOf()
 
+    @OneToMany(mappedBy = "genreEntity")
+    private List<VidioEntity> vidioEntities;
 }
 

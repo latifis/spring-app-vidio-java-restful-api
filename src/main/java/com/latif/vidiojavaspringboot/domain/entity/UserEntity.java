@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,10 +30,15 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name= "id_type", referencedColumnName = "id_type")
+    private TypeUserEntity typeUserEntity;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "id_type")
 //    var idType: TypeUserEntity? = null,
 
+    @OneToMany(mappedBy = "user")
+    private List<FavoriteEntity> favoriteEntities;
 //    @OneToMany(mappedBy = "idUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
 //    var favorites: MutableList<FavoriteEntity> = mutableListOf()
 

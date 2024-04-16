@@ -3,7 +3,7 @@ spring:
     name: bootcamp-service
   dataSource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/bootcamp_fp2
+    url: jdbc:postgresql://localhost:5432/vidio_v2
     username: postgres
     password: 1234
   jpa:
