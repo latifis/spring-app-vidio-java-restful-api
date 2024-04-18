@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,36 +22,33 @@ public class VidioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vidio")
-    private Long idVidio;
+    private Integer id;
 
     @Column(name = "name_vidio")
-    private String nameVidio;
+    private String name;
 
     @Column(name = "creator_vidio")
-    private String creatorVidio;
+    private String creator;
 
     @ManyToOne
-    @JoinColumn(name= "id_type", referencedColumnName = "id_type")
-    private TypeUserEntity typeUserEntity;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "type_id")
-//    var typeId: TypeUserEntity? = null,
+    @JoinColumn(name = "id_type", nullable = false)
+    private TypeUserEntity type;
 
-    @ManyToOne
-    @JoinColumn(name= "id_genre", referencedColumnName = "id_genre")
-    private GenreEntity genreEntity;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_genre")
-//    var idGenre: GenreEntity? = null,
+    @ManyToMany
+    @JoinTable(
+            name = "vidio_genre",
+            joinColumns = @JoinColumn(name = "vidio_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<GenreEntity> genreEntities;
 
     @Column(name = "dt_added")
-    private Date dtAdded;
+    private LocalDate added;
 
     @Column(name = "dt_updated")
-    private Date dtUpdatedl;
+    private LocalDate updated;
 
-    @OneToMany(mappedBy = "vidio")
-    private List<FavoriteEntity> favoriteEntities;
-//    @OneToMany(mappedBy = "idVidio", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-//    var favorites: MutableList<FavoriteEntity> = mutableListOf()
+    @ManyToMany(mappedBy = "vidioEntities")
+    private Set<FavoriteEntity> favorite;
+
 }

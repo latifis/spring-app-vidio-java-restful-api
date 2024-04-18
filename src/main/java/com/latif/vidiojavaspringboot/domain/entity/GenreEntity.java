@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,15 +20,14 @@ public class GenreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_genre")
-    private Long idGenre;
+    private Integer id;
 
     @Column(name = "genre_name")
-    private String genreName;
+    private String name;
 
+    @ManyToMany(mappedBy = "genreEntities")
+    private Set<VidioEntity> vidioEntities;
 //    @OneToMany(mappedBy = "idGenre", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
 //    var vidios: MutableList<VidioEntity> = mutableListOf()
-
-    @OneToMany(mappedBy = "genreEntity")
-    private List<VidioEntity> vidioEntities;
 }
 

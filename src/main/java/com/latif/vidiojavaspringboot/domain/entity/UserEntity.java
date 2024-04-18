@@ -19,10 +19,10 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
-    private Long idUser;
+    private Integer id;
 
     @Column(name = "user_name")
-    private String userName;
+    private String username;
 
     @Column(name = "email")
     private String email;
@@ -31,13 +31,10 @@ public class UserEntity {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name= "id_type", referencedColumnName = "id_type")
+    @JoinColumn(name = "id_type", nullable = false)
     private TypeUserEntity typeUserEntity;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_type")
-//    var idType: TypeUserEntity? = null,
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userEntity")
     private List<FavoriteEntity> favoriteEntities;
 //    @OneToMany(mappedBy = "idUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
 //    var favorites: MutableList<FavoriteEntity> = mutableListOf()

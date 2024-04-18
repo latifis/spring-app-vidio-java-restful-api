@@ -25,9 +25,6 @@ public class TypeUserEntity {
 
     @OneToMany(mappedBy = "typeUserEntity")
     private List<UserEntity> userEntities;
-//    @OneToMany(mappedBy = "user")
-//    private List<Cart> carts;
-//    @OneToMany(mappedBy = "idType", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-//    var users: MutableList<UserEntity> = mutableListOf()
+
 }
 

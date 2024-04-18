@@ -1,45 +1,41 @@
 package com.latif.vidiojavaspringboot.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "mst_favorite")
 public class FavoriteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_favorite")
-    private Long idFavorite;
+    private Integer id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "favorite_vidio",
+            joinColumns = @JoinColumn(name = "favorite_id"),
+            inverseJoinColumns = @JoinColumn(name = "vidio_id")
+    )
+    private Set<VidioEntity> vidioEntities;
 
     @ManyToOne
-    @JoinColumn(name= "id_vidio", referencedColumnName = "id_vidio")
-    private VidioEntity vidio;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idVidio")
-//    var idVidio: VidioEntity? = null,
+    @JoinColumn(name = "user_added", nullable = false)
+    private UserEntity userEntity;
 
-    @ManyToOne
-    @JoinColumn(name= "id_user", referencedColumnName = "id_user")
-    private UserEntity user;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idUser")
-//    var idUser: UserEntity? = null,
-
-    //    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_added")
-    private Date dtAdded;
+    private LocalDate dtAdded;
 
-    //    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_updated")
-    private Date dtUpdated;
+    private LocalDate dtUpdated;
+
 }
