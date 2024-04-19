@@ -1,15 +1,11 @@
 package com.latif.vidiojavaspringboot.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -24,7 +20,7 @@ public class TypeUserEntity {
     private String typeUser;
 
     @OneToMany(mappedBy = "typeUserEntity")
-    private List<UserEntity> userEntities;
+    private Set<UserEntity> userEntities;
 
 }
 

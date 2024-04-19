@@ -1,15 +1,12 @@
 package com.latif.vidiojavaspringboot.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -35,7 +32,7 @@ public class UserEntity {
     private TypeUserEntity typeUserEntity;
 
     @OneToMany(mappedBy = "userEntity")
-    private List<FavoriteEntity> favoriteEntities;
+    private Set<FavoriteEntity> favoriteEntities;
 //    @OneToMany(mappedBy = "idUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
 //    var favorites: MutableList<FavoriteEntity> = mutableListOf()
 
