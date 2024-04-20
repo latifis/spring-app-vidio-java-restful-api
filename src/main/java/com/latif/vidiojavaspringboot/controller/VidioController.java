@@ -23,7 +23,7 @@ public class VidioController {
     }
 
     @PostMapping
-    public ResponseEntity<ResMessageDto<String>> createGame(
+    public ResponseEntity<ResMessageDto<String>> createVidio(
             @Valid
             @RequestBody ReqVidioDto req
     ) {
