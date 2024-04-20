@@ -9,6 +9,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "mst_genre")
 public class GenreEntity {
 
