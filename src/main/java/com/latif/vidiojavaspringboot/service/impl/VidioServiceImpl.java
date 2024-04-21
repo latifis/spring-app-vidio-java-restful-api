@@ -12,6 +12,7 @@ import com.latif.vidiojavaspringboot.util.GeneralFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,14 +37,17 @@ public class VidioServiceImpl implements VidioService {
         VidioEntity input = VidioEntity.builder()
                 .type(generalFunction.typeAssign(req.getType()))
                 .name(req.getName())
+                .creator(req.getCreator())
                 .genreEntities(generalFunction.genreSearch(req.getGenre()))
+                .added(LocalDate.now())
+                .updated(LocalDate.now())
                 .build();
         try{
             Integer id = 0;
             VidioEntity data = vidioRepository.save(input);
             id = data.getId();
 
-            String message = id == 0 ? "Genre Added Failed" : "Genre Added Success";
+            String message = id == 0 ? "Vidio Added Failed" : "Vidio Added Success";
             return new ResMessageDto<>(
                     200, message,null
             );
@@ -88,8 +92,11 @@ public class VidioServiceImpl implements VidioService {
             ResVidioDto dto = ResVidioDto.builder()
                     .id(data.getId())
                     .name(data.getName())
+                    .creator(data.getCreator())
                     .type(data.getType().getTypeUser())
                     .genres(generalFunction.encodeGenre(data.getGenreEntities()))
+                    .added(data.getAdded())
+                    .update(data.getUpdated())
                     .build();
             listDto.add(dto);
         }

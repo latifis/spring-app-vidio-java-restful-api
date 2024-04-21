@@ -21,6 +21,10 @@ public class ReqVidioDto {
     @NotNull(message = "Type cannot be null")
     private String type;
 
+    @NotBlank(message = "Creator cannot be blank")
+    @NotNull(message = "Creator cannot be null")
+    private String creator;
+
     @NotEmpty(message = "Genre list cannot be empty")
     @NotNull(message = "Genre list cannot be null")
     private List<Integer> genre;

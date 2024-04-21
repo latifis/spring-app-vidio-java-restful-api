@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Builder
@@ -19,6 +20,12 @@ public class ResVidioDto {
 
     private String type;
 
+    private String creator;
+
     private List<String> genres;
+
+    private LocalDate added;
+
+    private LocalDate update;
 
 }
