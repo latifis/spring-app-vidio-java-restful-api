@@ -7,6 +7,7 @@ import com.latif.vidiojavaspringboot.domain.entity.GenreEntity;
 import com.latif.vidiojavaspringboot.exception.AccessDeniedException;
 import com.latif.vidiojavaspringboot.repository.GenreRepository;
 import com.latif.vidiojavaspringboot.service.GenreService;
+import com.latif.vidiojavaspringboot.util.GeneralFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +16,19 @@ import java.util.List;
 @Service
 public class GenreServiceImpl implements GenreService {
 
+    public final GeneralFunction generalFunction;
+
     public final GenreRepository genreRepository;
 
     @Autowired
-    public GenreServiceImpl (GenreRepository genreRepository){
+    public GenreServiceImpl (GenreRepository genreRepository, GeneralFunction generalFunction){
         this.genreRepository = genreRepository;
+        this.generalFunction = generalFunction;
     }
 
     @Override
     public ResMessageDto<String> create(ReqGenreDto req) {
+        generalFunction.checkGenreNameNotExist(req.getName());
         GenreEntity input = GenreEntity.builder()
                 .name(req.getName())
                 .build();

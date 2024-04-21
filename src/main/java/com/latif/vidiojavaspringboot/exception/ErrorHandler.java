@@ -37,12 +37,19 @@ public class ErrorHandler {
     @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<ResMessageDto<String>> handleDataNotFound(RuntimeException exception) {
 //        exception.printStackTrace();
-        return ResponseEntity.badRequest().body(new ResMessageDto<>(500, (String) exception.getMessage(), null));
+        return ResponseEntity.badRequest()
+                .body(new ResMessageDto<>(500, (String) exception.getMessage(), null));
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ResMessageDto<String>> handleAccessDeniedException(AccessDeniedException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ResMessageDto<>(403, ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(DataExistException.class)
+    public ResponseEntity<ResMessageDto<String>> handleDataExistException(DataExistException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ResMessageDto<>(400, exception.getMessage(), null));
     }
 
 }

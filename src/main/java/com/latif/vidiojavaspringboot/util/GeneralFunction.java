@@ -4,6 +4,7 @@ import com.latif.vidiojavaspringboot.domain.entity.GenreEntity;
 import com.latif.vidiojavaspringboot.domain.entity.TypeUserEntity;
 import com.latif.vidiojavaspringboot.domain.entity.VidioEntity;
 import com.latif.vidiojavaspringboot.exception.AccessDeniedException;
+import com.latif.vidiojavaspringboot.exception.DataExistException;
 import com.latif.vidiojavaspringboot.exception.DataNotFoundException;
 import com.latif.vidiojavaspringboot.repository.GenreRepository;
 import com.latif.vidiojavaspringboot.repository.TypeUserRepository;
@@ -30,7 +31,14 @@ public class GeneralFunction{
         if (typeFound == null) {
             throw new DataNotFoundException("Type not found");
         }
-        return typeFound; // Assuming 'getTypeId' returns a String. Make sure this is non-null or handled if it can be.
+        return typeFound;
+    }
+
+    public void checkGenreNameNotExist(String genreName) {
+        GenreEntity existingGenre = genreRepository.findByName(genreName);
+        if (existingGenre != null) {
+            throw new DataExistException("Genre with name '" + genreName + "' already exists");
+        }
     }
 
     public String nullType(String type) {
