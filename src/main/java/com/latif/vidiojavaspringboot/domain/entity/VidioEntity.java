@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -35,7 +36,7 @@ public class VidioEntity {
             joinColumns = @JoinColumn(name = "vidio_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
-    private Set<GenreEntity> genreEntities;
+    private List<GenreEntity> genreEntities;
 
     @Column(name = "dt_added")
     private LocalDate added;

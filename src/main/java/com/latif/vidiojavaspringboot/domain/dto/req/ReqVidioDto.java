@@ -23,6 +23,6 @@ public class ReqVidioDto {
 
     @NotEmpty(message = "Genre list cannot be empty")
     @NotNull(message = "Genre list cannot be null")
-    private Set<Integer> genre;
+    private List<Integer> genre;
 
 }

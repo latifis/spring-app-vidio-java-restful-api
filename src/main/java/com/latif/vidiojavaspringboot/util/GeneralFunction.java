@@ -49,8 +49,8 @@ public class GeneralFunction{
         }
     }
 
-    public Set<GenreEntity> genreSearch(Set<Integer> genreIds) {
-        Set<GenreEntity> genreEntities = new HashSet<>();
+    public List<GenreEntity> genreSearch(List<Integer> genreIds) {
+        List<GenreEntity> genreEntities = new ArrayList<>();
         for (Integer genreId : genreIds) {
             Optional<GenreEntity> optionalEntity = genreRepository.findById(genreId);
             if (optionalEntity.isPresent()) {

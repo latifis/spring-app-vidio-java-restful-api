@@ -12,6 +12,7 @@ import com.latif.vidiojavaspringboot.util.GeneralFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,7 +60,42 @@ public class VidioServiceImpl implements VidioService {
 
     @Override
     public ResMessageDto<List<ResVidioDto>> getAll(String token) {
-        return null;
+        // Decode JWT token to get type information (assuming JwtGenerator is used for decoding)
+        // Claims claim = new JwtGenerator().decodeJwt(token);
+
+        // Retrieve typeEntity based on type from JWT claim
+        // String typeId = claim.get("type").toString();
+        // TypeEntity typeEntity = typeRepo.findById(typeId).orElse(null);
+
+        // Check if typeEntity is found
+        // if (typeEntity == null) {
+        //    throw new SomethingWrongException("Type not found in JWT claim");
+        // }
+
+        // Fetch list of games based on typeEntity
+        // if (typeEntity.getName().equals("Free")) {
+        //    listData = repo.findByType(typeEntity);
+        // } else {
+        //    listData = repo.findAll();
+        // }
+
+        // Get Data
+        List<VidioEntity> listData = vidioRepository.findAll();
+        List<ResVidioDto> listDto = new ArrayList<>();
+
+        // Convert VidioEntity list to ResVidioDto list
+        for (VidioEntity data : listData) {
+            ResVidioDto dto = ResVidioDto.builder()
+                    .id(data.getId())
+                    .name(data.getName())
+                    .type(data.getType().getTypeUser())
+                    .genres(generalFunction.encodeGenre(data.getGenreEntities()))
+                    .build();
+            listDto.add(dto);
+        }
+
+        // Return success response with list of ResGameDto
+        return new ResMessageDto<>(200, "Successfully retrieved all games", listDto);
     }
 
     @Override
