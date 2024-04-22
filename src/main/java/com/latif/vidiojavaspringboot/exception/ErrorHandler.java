@@ -52,4 +52,15 @@ public class ErrorHandler {
                 .body(new ResMessageDto<>(400, exception.getMessage(), null));
     }
 
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ResMessageDto<?>> handleInvalidTokenException(InvalidTokenException exception) {
+        exception.printStackTrace();
+        ResMessageDto<?> responseBody = new ResMessageDto<>(
+                401,
+                exception.getMessage() != null ? exception.getMessage() : "",
+                null
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
+    }
+
 }
